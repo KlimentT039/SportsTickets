@@ -1,0 +1,66 @@
+<!DOCTYPE>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Leagues</title>
+</head>
+<body>
+<header th:replace="fragments/header.html"/>
+<div class="container" style="padding-top: 150px;text-align: center">
+    <!-- <div class="row">
+         <div class="col-md-6">
+ <form th:method="POST" th:action="@{/leagues/teams}">
+     <div class="form-group">
+         <div th:each="team: ${teams}"><input type="radio" name="id" th:value="${team.getId()}">
+             <th:block th:text="${team.getName()}"/>
+              <a th:href="@{'/teams/{id}/edit' (id=${team.getId()})}"><i>Edit</i></a>
+          </div>
+         <div class="col-md-6" style="text-align: right">
+             <input type="submit" value="Submit">
+         </div>
+     </div>
+         </form>
+         </div>
+     </div>
+         <div class="row">
+             <div class="col-sm-12">
+                 <a href="/leagues" class="btn btn-block btn-dark add-product-btn">
+                     Back
+                 </a>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-sm-12">
+                 <a href="/teams/add" class="btn btn-block btn-dark add-product-btn">
+                     Add new Team
+                 </a>
+             </div>
+         </div>
+
+ </div>
+ -->
+<div class="row">
+    <div class="col-6">
+<form class="form-control" th:method="POST" th:action="@{/leagues/addTeams}">
+    <label for="team">Team</label><select name="team" id="team" class="form-control">
+    <option th:each="team: ${teams}" th:text="${team.getName()}" th:value="${team.getId()}">
+    </option></select>
+    <br/>
+    <label for="league">League</label><select name="league" id="league" class="form-control">
+    <option th:each="league: ${leagues}" th:text="${league.getName()}" th:value="${league.getName()}">
+    </option>
+</select>
+    <input type="submit" value="Submit"/>
+</form>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

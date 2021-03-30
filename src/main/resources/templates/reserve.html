@@ -1,0 +1,271 @@
+<!DOCTYPE>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Teams</title>
+    <style>
+        body {
+            font-family: Arial;
+            font-size: 17px;
+            padding: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: -ms-flexbox; /* IE10 */
+            display: flex;
+            -ms-flex-wrap: wrap; /* IE10 */
+            flex-wrap: wrap;
+            margin: 0 -16px;
+        }
+
+        .col-25 {
+            -ms-flex: 25%; /* IE10 */
+            flex: 25%;
+        }
+
+        .col-50 {
+            -ms-flex: 50%; /* IE10 */
+            flex: 50%;
+        }
+
+        .col-75 {
+            -ms-flex: 75%; /* IE10 */
+            flex: 75%;
+        }
+
+        .col-25,
+        .col-50,
+        .col-75 {
+            padding: 0 16px;
+        }
+
+        .container {
+            padding: 5px 20px 15px 20px;
+            border: 1px solid lightgrey;
+            border-radius: 3px;
+        }
+
+        input[type=text] {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .icon-container {
+            margin-bottom: 20px;
+            padding: 7px 0;
+            font-size: 24px;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            width: 100%;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            color: #2196F3;
+        }
+
+        hr {
+            border: 1px solid lightgrey;
+        }
+
+        span.price {
+            float: right;
+            color: grey;
+        }
+
+        /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+        @media (max-width: 800px) {
+            .row {
+                flex-direction: column-reverse;
+            }
+            .col-25 {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+
+
+</head>
+<body>
+<header th:replace="fragments/header.html">
+</header>
+<p></p>
+<div class="main" style="padding-top: 100px;text-align: center">
+
+
+<div class="row">
+    <div class="col-75">
+        <div class="container">
+            <form th:method="POST" th:action="@{'/reserve/{id}' (id=${match.getId()})}">
+                <div class="row">
+                    <div class="col-50">
+                        <h3>Billing Address</h3>
+                        <input id="id" type="hidden" name="id" th:value="(${match.getId()})">
+                        <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="First Name">
+                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                        <input type="text" id="email" name="email" placeholder="Enter your e-mail">
+                        <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                        <input type="text" id="adr" name="address" placeholder="Enter your street">
+                        <label for="city"><i class="fa fa-institution"></i> City</label>
+                        <input type="text" id="city" name="city" placeholder="City">
+
+                        <div class="row">
+                            <div class="col-50">
+                                <label for="state">State</label>
+                                <input type="text" id="state" name="state" placeholder="State">
+                            </div>
+                            <div class="col-50">
+                                <label for="zip">Zip</label>
+                                <input type="text" id="zip" name="zip" placeholder="ZIP">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-50">
+                        <h3>Payment</h3>
+                        <label for="fname">Accepted Cards</label>
+                        <div class="icon-container">
+                            <i class="fa fa-cc-visa" style="color:#000080;"></i>
+                            <i class="fa fa-cc-amex" style="color:blue;"></i>
+                            <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                            <i class="fa fa-cc-discover" style="color:orange;"></i>
+                        </div>
+                        <label for="cname">Name on Card</label>
+                        <input type="text" id="cname" name="cardname" placeholder="">
+                        <label for="ccnum">Credit card number</label>
+                        <input type="text" id="ccnum" name="cardnumber" placeholder="">
+                        <label for="expmonth">Exp Month</label>
+                        <input type="text" id="expmonth" name="expmonth" placeholder="">
+                        <div class="row">
+                            <div class="col-50">
+                                <label for="expyear">Exp Year</label>
+                                <input type="text" id="expyear" name="expyear" placeholder="2018">
+                            </div>
+                            <div class="col-50">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="352">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                <label for="hotelId">Hotel</label><select name="hotelId" id="hotelId" class="form-control" onclick="myFunction()">
+                <option th:each="hotel: ${hotels}" th:text="${hotel.getName()}" th:value="${hotel.getPriceByNight()}">
+                </option></select>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-6">
+                <label for="nightBefore">One night before</label>
+                <input type="checkbox" id="nightBefore" name="nightBefore" onclick="myFunction2()"value="One night before">
+                            </div>
+                            <div class="col-6">
+                <label for="nightAfter">One night after</label>
+                <input type="checkbox" id="nightAfter" name="nightAfter" onclick="myFunction1()" value="One night after">
+                                </div>
+                            <div class="col-12 col-sm-3 offset-sm-1">
+                                <a role="button" class="btn btn-warning
+                    btn-block" onclick="calculate()" href="#totalPrice" >Total Price</a>
+                            </div>
+                <input type="submit" value="Continue to checkout" class="btn">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-25">
+        <div class="container">
+            <label id="totalPrice">Total Price: </label>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script th:inline="javascript">
+
+    var priceTicket = "[[${match.getPriceTickets()}]]";
+    var e = document.getElementById("hotelId");
+    var totalPrice1 =priceTicket;
+    var price;
+
+
+
+    function myFunction() {
+        totalPrice1 = priceTicket;
+        price= $("#hotelId :selected").val()
+        totalPrice1 = parseInt(totalPrice1);
+        totalPrice1+=parseInt(price);
+    }
+
+    function myFunction1(){
+        var checkbox = document.getElementById("nightAfter")
+        price= $("#hotelId :selected").val()
+        if(checkbox.checked === true){
+           totalPrice1 = parseInt(totalPrice1);
+           totalPrice1+=parseInt(price);
+        }
+        if(checkbox.checked === false){
+            totalPrice1 = parseInt(totalPrice1);
+            totalPrice1-=parseInt(price);
+        }
+
+
+    }
+    function myFunction2(){
+        var checkbox = document.getElementById("nightBefore")
+        price= $("#hotelId :selected").val()
+        if(checkbox.checked === true){
+            totalPrice1 = parseInt(totalPrice1);
+            totalPrice1+=parseInt(price);
+        }
+        if(checkbox.checked === false){
+            totalPrice1 = parseInt(totalPrice1);
+            totalPrice1-=parseInt(price);
+        }
+
+    }
+
+    function calculate(){
+        var x = document.getElementById("totalPrice");
+        console.log(totalPrice1);
+        x.innerText = "Total price is: "+totalPrice1+"$";
+    }
+</script>
+
+
+</body>
+</html>
